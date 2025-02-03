@@ -5,7 +5,6 @@
     justify-content: space-between;
     background-color: #f0f4f9;
     padding: 25px 15px;
-
 }
 
 .sidebar img{
@@ -65,6 +64,6 @@
 }
 @media (max-width:600px){
     .sidebar{
-        display: none;
+        display: 0;
     }
 }

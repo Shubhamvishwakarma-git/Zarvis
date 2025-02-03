@@ -1,55 +1,124 @@
+// import React, { useContext, useState } from "react";
+// import "./sidebar.css";
+// import { assets } from "../assets/assets";
+// import { Context } from "../context/Context";
+
+// const Sidebar = () => {
+//   const [extended, setextended] = useState(false);
+//   const {onsend, prevprompt,setrecentprompt,newchat } = useContext(Context)
+
+//   const loadprompt = async (prompt) =>{
+//     setrecentprompt(prompt)
+//     onsend(prompt)
+//   }
+
+//   return (
+//     <div className="sidebar">
+//       <div className="top">
+//         <img onClick={()=>setextended(prev=>!prev)} className="menu" src={assets.menu_icon} alt="" />
+//         <div onClick={()=>newchat()} className="new-chat">
+//           <img src={assets.plus_icon} alt="plus icon" />
+//           {extended ? <p>New Chat</p> : null}
+//         </div>
+//         {extended ? (
+//           <div className="recent">
+//             <p className="recent-title">Recent</p>
+//             {prevprompt.map((item, index)=>{
+//               return(
+//                 <div onClick={()=>loadprompt(item)} className="recent-entry">
+//               <img src={assets.message_icon} alt="message icon" />
+//               <p>{item.slice(0, 18)} ...</p>
+//             </div>
+//               )
+//             })}
+            
+//           </div>
+//         ) : null}
+//       </div>
+//       <div className="bottom">
+//         <div className="bottom-item recent-entry">
+//           <img src={assets.question_icon} alt="" />
+//           {extended?<p>Help</p>:null}
+//         </div>
+//         <div className="bottom-item recent-entry">
+//           <img src={assets.history_icon} alt="" />
+//           {extended?<p>Activity</p>:null}
+//         </div>
+//         <div className="bottom-item recent-entry">
+//           <img src={assets.setting_icon} alt="" />
+//           {extended?<p>Settings</p>:null}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Sidebar;
+
+
 import React, { useContext, useState } from "react";
 import "./sidebar.css";
 import { assets } from "../assets/assets";
 import { Context } from "../context/Context";
 
 const Sidebar = () => {
-  const [extended, setextended] = useState(false);
-  const {onsend, prevprompt,setrecentprompt,newchat } = useContext(Context)
+  const [extended, setExtended] = useState(false);
+  const { onsend, prevprompt, setrecentprompt, newchat } = useContext(Context);
 
-  const loadprompt = async (prompt) =>{
-    setrecentprompt(prompt)
-    onsend(prompt)
-  }
+  const loadPrompt = async (prompt) => {
+    setrecentprompt(prompt);
+    onsend(prompt);
+  };
 
   return (
-    <div className="sidebar">
-      <div className="top">
-        <img onClick={()=>setextended(prev=>!prev)} className="menu" src={assets.menu_icon} alt="" />
-        <div onClick={()=>newchat()} className="new-chat">
-          <img src={assets.plus_icon} alt="plus icon" />
-          {extended ? <p>New Chat</p> : null}
-        </div>
-        {extended ? (
-          <div className="recent">
-            <p className="recent-title">Recent</p>
-            {prevprompt.map((item, index)=>{
-              return(
-                <div onClick={()=>loadprompt(item)} className="recent-entry">
-              <img src={assets.message_icon} alt="message icon" />
-              <p>{item.slice(0, 18)} ...</p>
-            </div>
-              )
-            })}
-            
+    <>
+      <button className="menu-btn" onClick={() => setExtended(!extended)}>
+      </button>
+
+      <div className={`sidebar ${extended ? "open" : ""}`}>
+        <div className="top">
+          <img
+            onClick={() => setExtended((prev) => !prev)}
+            className="menu"
+            src={assets.menu_icon}
+            alt="menu icon"
+          />
+          <div onClick={() => newchat()} className="new-chat">
+            <img src={assets.plus_icon} alt="plus icon" />
+            {extended ? <p>New Chat</p> : null}
           </div>
-        ) : null}
+          {extended && (
+            <div className="recent">
+              <p className="recent-title">Recent</p>
+              {prevprompt.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => loadPrompt(item)}
+                  className="recent-entry"
+                >
+                  <img src={assets.message_icon} alt="message icon" />
+                  <p>{item.slice(0, 18)} ...</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="bottom">
+          <div className="bottom-item recent-entry">
+            <img src={assets.question_icon} alt="help icon" />
+            {extended && <p>Help</p>}
+          </div>
+          <div className="bottom-item recent-entry">
+            <img src={assets.history_icon} alt="history icon" />
+            {extended && <p>Activity</p>}
+          </div>
+          <div className="bottom-item recent-entry">
+            <img src={assets.setting_icon} alt="settings icon" />
+            {extended && <p>Settings</p>}
+          </div>
+        </div>
       </div>
-      <div className="bottom">
-        <div className="bottom-item recent-entry">
-          <img src={assets.question_icon} alt="" />
-          {extended?<p>Help</p>:null}
-        </div>
-        <div className="bottom-item recent-entry">
-          <img src={assets.history_icon} alt="" />
-          {extended?<p>Activity</p>:null}
-        </div>
-        <div className="bottom-item recent-entry">
-          <img src={assets.setting_icon} alt="" />
-          {extended?<p>Settings</p>:null}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
