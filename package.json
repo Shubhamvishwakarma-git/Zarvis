@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Shubhamvishwakarma-git/Zarvis.git",
+  "homepage": "https://shubhamvishwakarma-git.github.io/Zarvis",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
